@@ -5,11 +5,15 @@ import android.os.Bundle
 import android.widget.EditText
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.challengeapp.data.Challenge
 import com.example.challengeapp.data.ChallengeDatabase
 import com.example.challengeapp.databinding.ActivityMainBinding
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -17,7 +21,7 @@ class MainActivity : AppCompatActivity() {
         ChallengeViewModelFactory(
             ChallengeDatabase.getDatabase(
                 this.applicationContext,
-                viewModelScope
+                lifecycleScope
             )
         )
     }
@@ -34,8 +38,10 @@ class MainActivity : AppCompatActivity() {
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
         binding.recyclerView.adapter = adapter
 
-        viewModel.challenges.observe(this) { challenges ->
-            adapter.submitList(challenges)
+        lifecycleScope.launch {
+            viewModel.challenges.collect { challenges ->
+                adapter.submitList(challenges)
+            }
         }
     }
 

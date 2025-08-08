@@ -13,6 +13,9 @@ interface ChallengeDao {
 
     @Insert
     suspend fun insert(challenge: Challenge)
+    
+    @Insert
+    suspend fun insertAll(vararg challenges: Challenge)
 
     @Update
     suspend fun update(challenge: Challenge)

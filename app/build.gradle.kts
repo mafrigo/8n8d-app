@@ -10,7 +10,7 @@ android {
 
     defaultConfig {
         applicationId = "com.example.challengeapp"
-        minSdk = 24
+        minSdk = 21
         targetSdk = 33
         versionCode = 1
         versionName = "1.0"
@@ -32,6 +32,17 @@ android {
     kotlinOptions {
         jvmTarget = "17"
     }
+    buildFeatures {
+        dataBinding = true
+    }
+}
+
+kapt {
+    correctErrorTypes = true
+    javacOptions {
+        option("-source", "17")
+        option("-target", "17")
+    }
 }
 
 dependencies {
@@ -43,5 +54,7 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.6.1")
     implementation("androidx.recyclerview:recyclerview:1.3.1")
     implementation("com.google.android.material:material:1.9.0")
+    implementation("androidx.activity:activity-ktx:1.7.2")
+    implementation("androidx.fragment:fragment-ktx:1.6.1")
     kapt("androidx.room:room-compiler:2.5.2")
 }

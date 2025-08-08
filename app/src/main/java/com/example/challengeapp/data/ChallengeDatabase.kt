@@ -43,15 +43,12 @@ abstract class ChallengeDatabase : RoomDatabase() {
                     scope.launch {
                         database.challengeDao().insertAll(
                             Challenge(name = "5km Run", description = "Complete 5km run", score = 0),
-                            Challenge(name = "Daily Reading", description = "Read 30 minutes daily", score = 0)
+                            Challenge(name = "Daily Reading", description = "Read 30 minutes daily", score = 0),
+                            Challenge(name = "Meditation", description = "Meditate for 10 minutes", score = 0)
                         )
                     }
                 }
             }
-        }
-                Challenge(description = "Meditate for 10 minutes", score = 0)
-            )
-            challenges.forEach { dao.insert(it) }
         }
     }
 }
