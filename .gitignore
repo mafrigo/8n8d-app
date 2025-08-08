@@ -1,0 +1,8 @@
+# Ignore Gradle project-specific cache directory
+.gradle
+gradle/*
+gradle-7.5.1/*
+*.zip
+
+# Ignore Gradle build output directory
+build
